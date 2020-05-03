@@ -1,12 +1,15 @@
 /*
-
- * dd
+ *
+ * add
  * comit
- *pull
- * */
+ * pull
+ * merge
+ * resolve
+ * comit
+ * push
+ *
+ */
 package ejrmi;
-...
-...
 
 
 import java.rmi.registry.LocateRegistry;
