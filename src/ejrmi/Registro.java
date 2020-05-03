@@ -10,6 +10,7 @@ hola soy
 pruba jose jose
 
 ultima
+ultima2
         
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
