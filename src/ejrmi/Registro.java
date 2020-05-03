@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package ejrmi;
-hola soy
+hola soy edgar y tu?
 
+hola soy
+pruba jose jose
+        
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
