@@ -283,7 +283,7 @@ public class Registro extends javax.swing.JFrame {
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
             
-            if()
+            if(nombre.getText().equals("Nombre"))
             
             JOptionPane.showMessageDialog(null, c.log(user.getText(), pass.getText()));
             
