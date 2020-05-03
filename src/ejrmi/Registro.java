@@ -8,6 +8,8 @@ hola soy edgar y tu?
 
 hola soy
 pruba jose jose
+
+ultima
         
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
