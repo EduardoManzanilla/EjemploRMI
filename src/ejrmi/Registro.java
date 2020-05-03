@@ -4,21 +4,7 @@
  * and open the template in the editor.
  */
 package ejrmi;
-hola 2
-hola desde netbeans
 
-hola desde jeibraint
-hola 2020
-
-estas aqui
-
-ggg
-
-
-.
-jhhgcghgh
-
-desde jetbrains 12pm
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
