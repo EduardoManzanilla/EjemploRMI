@@ -17,6 +17,8 @@ estas aqui 2
 
 .
 jhhgcghgh
+
+desde jetbrains 12pm
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
