@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package ejrmi;
-hola soy
+hola soy edgar y tu?
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
