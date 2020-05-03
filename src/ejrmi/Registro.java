@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ejrmi;
+hola 2
 hola desde netbeans
 
 hola desde jeibraint
