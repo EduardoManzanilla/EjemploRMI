@@ -294,14 +294,7 @@ public class Registro extends javax.swing.JFrame {
             System.out.println(e); 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-public void verifyFields(){
-    String jnombre = nombre.getText();
-    String jedad = edad.getText();
-    String jpeso = peso.getText();
-    String jestatura = estatura.getText();
-    String jpass = pass.getText();
-    String juser = user.getText();
-}
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        Login log = new Login();
        log.setVisible(true);
