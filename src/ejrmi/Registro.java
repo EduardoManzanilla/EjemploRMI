@@ -12,11 +12,13 @@ hola 2020
 
 estas aqui
 
-estas aqui 2
+ggg
 
 
 .
 jhhgcghgh
+
+desde jetbrains 12pm
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
