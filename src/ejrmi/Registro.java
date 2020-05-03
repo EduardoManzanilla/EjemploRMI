@@ -5,7 +5,9 @@
  */
 package ejrmi;
 
-        
+
+estas aqui
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
