@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package ejrmi;
+...
+...
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
