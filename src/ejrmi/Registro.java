@@ -16,7 +16,7 @@ estas aqui 2
 
 
 .
-tu
+jhhgcghgh
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
