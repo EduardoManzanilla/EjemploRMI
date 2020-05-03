@@ -38,7 +38,7 @@ public class Cliente {
                        int x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el primer numero"));
                        int y = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el segundo numero"));
                        
-                            JOptionPane.showMessageDialog(null,"la suma es: " + c.add(x,y));
+                           // JOptionPane.showMessageDialog(null,"la suma es: " + c.add(x,y));
                             break;
                     } 
                    case "2":{
