@@ -5,7 +5,10 @@
  */
 package ejrmi;
 
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -274,12 +277,14 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_passMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       /* try{
-           String ip= "192.168.0.7";
+        try{
+           String ip= "192.168.0.8";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
-     
+            
+            if()
+            
             JOptionPane.showMessageDialog(null, c.log(user.getText(), pass.getText()));
             
          
@@ -287,9 +292,16 @@ public class Registro extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + e);
             System.out.println(e); 
-        }*/
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+public void verifyFields(){
+    String jnombre = nombre.getText();
+    String jedad = edad.getText();
+    String jpeso = peso.getText();
+    String jestatura = estatura.getText();
+    String jpass = pass.getText();
+    String juser = user.getText();
+}
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        Login log = new Login();
        log.setVisible(true);

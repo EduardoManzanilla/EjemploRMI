@@ -13,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,10 +45,42 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         return a - b;
     }
 
-    @Override
-    public int add(int a, int b) throws RemoteException {
-        return a + b;
+   @Override
+    public String add(String nombre, int edad, float peso, float estatura, String usuario, String contrasena) throws RemoteException {
+      Connection connection = conex();
+       
+        boolean bandera= true;
+        String texto = "";
+       
+        PreparedStatement insertar;
+        ResultSet rs;
+        String InsertarLoggin ="Insert into login (usuario, contrasena, nombre, edad, peso, talla) values (?,?,?,?,?,?) ";
+
+        try
+        {
+        insertar = connection.prepareStatement(InsertarLoggin);
+        insertar.setString(1, usuario);
+        insertar.setString(2, contrasena);
+        insertar.setString(3, nombre);
+        insertar.setInt(4, edad);
+        insertar.setFloat(5, peso);
+        insertar.setFloat(6, estatura);
+        
+        }
+        catch(Exception problem)
+        {
+            bandera= false;
+        }
+       if(bandera=true){
+           texto= "Registro Satisfactorio";
+       }else{
+           texto= "No se pudo registrar. INTENTELO MAS TARDE";
+       }
+        
+     return texto;   
+    // return bandera; 
     }
+    
     
     public Connection conex (){
         
@@ -131,6 +164,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
      return texto;   
     // return bandera;
     }
+
     
     
     
