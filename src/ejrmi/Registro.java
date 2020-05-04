@@ -390,14 +390,19 @@ public class Registro extends javax.swing.JFrame {
          if(Character.isDigit(validar)){// validacion de no numeros
              getToolkit().beep();
              evt.consume();
-         }/*else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+         }else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
                  || (int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
                  || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
-                 || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255){//validacion de no carateres especiales
+                 || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=129
+                 || (int)evt.getKeyChar()==161  || (int)evt.getKeyChar()==191
+                 || (int)evt.getKeyChar()==176  || (int)evt.getKeyChar()==172
+                 )
+         {//validacion de no carateres especiales
             
              getToolkit().beep();
              evt.consume();
-         }*/
+         }
+         System.out.println((int)evt.getKeyChar());
     }//GEN-LAST:event_nombreKeyTyped
 
     /**
