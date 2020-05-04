@@ -78,6 +78,11 @@ public class Registro extends javax.swing.JFrame {
                 nombreFocusLost(evt);
             }
         });
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
 
         edad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edad.setText("Edad");
@@ -379,6 +384,21 @@ public class Registro extends javax.swing.JFrame {
              evt.consume();
          }
     }//GEN-LAST:event_estaturaKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+       char validar = evt.getKeyChar();       
+         if(Character.isDigit(validar)){// validacion de no numeros
+             getToolkit().beep();
+             evt.consume();
+         }/*else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+                 || (int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+                 || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+                 || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255){//validacion de no carateres especiales
+            
+             getToolkit().beep();
+             evt.consume();
+         }*/
+    }//GEN-LAST:event_nombreKeyTyped
 
     /**
      * @param args the command line arguments
