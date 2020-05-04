@@ -45,7 +45,7 @@ public class Cliente {
                        int x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el primer numero"));
                        int y = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el segundo numero"));
                        
-                            JOptionPane.showMessageDialog(null,"la resta es: " + c.sub(x,y));
+                          //  JOptionPane.showMessageDialog(null,"la resta es: " + c.sub(x,y));
                             break;
                    }
                    case "3":{
