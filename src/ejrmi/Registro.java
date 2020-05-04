@@ -71,78 +71,81 @@ public class Registro extends javax.swing.JFrame {
         nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nombre.setText("Nombre");
         nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nombreFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 nombreFocusLost(evt);
-            }
-        });
-        nombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nombreMouseClicked(evt);
             }
         });
 
         edad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edad.setText("Edad");
         edad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                edadFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 edadFocusLost(evt);
             }
         });
-        edad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                edadMouseClicked(evt);
+        edad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edadKeyTyped(evt);
             }
         });
 
         peso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         peso.setText("Peso");
         peso.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pesoFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 pesoFocusLost(evt);
             }
         });
-        peso.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pesoMouseClicked(evt);
+        peso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pesoKeyTyped(evt);
             }
         });
 
         estatura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         estatura.setText("Estatura");
         estatura.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                estaturaFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 estaturaFocusLost(evt);
             }
         });
-        estatura.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                estaturaMouseClicked(evt);
+        estatura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                estaturaKeyTyped(evt);
             }
         });
 
         user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         user.setText("Usuario");
         user.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                userFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 userFocusLost(evt);
-            }
-        });
-        user.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userMouseClicked(evt);
             }
         });
 
         pass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pass.setText("Contraseña");
         pass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 passFocusLost(evt);
-            }
-        });
-        pass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                passMouseClicked(evt);
             }
         });
 
@@ -211,29 +214,11 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void edadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edadMouseClicked
-        if(edad.getText().equals("Edad")){
-          edad.setText("");
-      }   
-    }//GEN-LAST:event_edadMouseClicked
-
-    private void nombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreMouseClicked
-       if(nombre.getText().equals("Nombre")){
-          nombre.setText("");
-      }// TODO add your handling code here:
-    }//GEN-LAST:event_nombreMouseClicked
-
     private void edadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edadFocusLost
        if(edad.getText().trim().toLowerCase().equals("Edad") || edad.getText().trim().toLowerCase().equals("")){
           edad.setText("Edad");
       }   // TODO add your handling code here:
     }//GEN-LAST:event_edadFocusLost
-
-    private void pesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pesoMouseClicked
-         if(peso.getText().equals("Peso")){
-          peso.setText("");
-          }// TODO add your handling code here:
-    }//GEN-LAST:event_pesoMouseClicked
 
     private void nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusLost
         if(nombre.getText().trim().toLowerCase().equals("Nombre") || nombre.getText().trim().toLowerCase().equals("")){
@@ -247,23 +232,11 @@ public class Registro extends javax.swing.JFrame {
       } // TODO add your handling code here:
     }//GEN-LAST:event_pesoFocusLost
 
-    private void estaturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estaturaMouseClicked
-       if(estatura.getText().equals("Estatura")){
-          estatura.setText("");
-          }
-    }//GEN-LAST:event_estaturaMouseClicked
-
     private void estaturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_estaturaFocusLost
      if(estatura.getText().trim().toLowerCase().equals("Estatura") || estatura.getText().trim().toLowerCase().equals("")){
           estatura.setText("Estatura");
       }
     }//GEN-LAST:event_estaturaFocusLost
-
-    private void userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseClicked
-        if(user.getText().equals("Usuario")){
-          user.setText("");
-          }
-    }//GEN-LAST:event_userMouseClicked
 
     private void userFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusLost
        if(user.getText().trim().toLowerCase().equals("Usuario") || user.getText().trim().toLowerCase().equals("")){
@@ -277,29 +250,45 @@ public class Registro extends javax.swing.JFrame {
       }
     }//GEN-LAST:event_passFocusLost
 
-    private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked
-         if(pass.getText().equals("Contraseña")){
-          pass.setText("");
-          }
-    }//GEN-LAST:event_passMouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //botón para enviar el registro a la base de datos
+      
         try{
-           String ip= "192.168.0.8";
+           String ip= "192.168.0.7";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
             
-            if(nombre.getText().equals("Nombre"))
-            
-            JOptionPane.showMessageDialog(null, c.log(user.getText(), pass.getText()));
-            
-            
-                                            
+            if(nombre.getText().equals("Nombre") || edad.getText().equals("Edad") || peso.getText().equals("Peso") ||
+                    estatura.getText().equals("Estatura") || user.getText().equals("Usuario") || pass.getText().equals("Contraseña")){
+                JOptionPane.showMessageDialog(null, "Existen campos vacios");
+            } else{
+              String texto="";
+              int eda= Integer.parseInt(edad.getText());
+              float pes=Float.parseFloat(peso.getText());
+              float estatu= Float.parseFloat(estatura.getText());
+              
+              if( c.sub(user.getText())){
+                JOptionPane.showMessageDialog(null, "El usuario ya esta registrado, intente con otro usuario");
+                user.setText("Usuario");
+              }else{
+                if(c.add(nombre.getText(), eda, pes, estatu, user.getText(), pass.getText())){
+                    JOptionPane.showMessageDialog(null, "Registro Satisfactorio");
+                        Login log = new Login();
+                        log.setVisible(true);
+                        log.pack();
+                        log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        this.dispose();
+                 }else{
+                    JOptionPane.showMessageDialog(null, "No se pudo registrar. INTENTELO MAS TARDE");
+                }     
+             }
+            }
+
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + e);
-            System.out.println(e); 
-        }
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado, intentelo de nuevo" +e);
+           // System.out.println(ex); 
+    	}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -309,6 +298,87 @@ public class Registro extends javax.swing.JFrame {
        log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edadKeyTyped
+        // TODO add your handling code here:
+         char validar = evt.getKeyChar();       
+         if(Character.isLetter(validar)){// validacion de no letras
+             getToolkit().beep();
+             evt.consume();
+         }else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+                 || (int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+                 || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+                 || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255){//validacion de no carateres especiales
+            
+             getToolkit().beep();
+             evt.consume();
+         }
+    }//GEN-LAST:event_edadKeyTyped
+
+    private void nombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusGained
+         if(nombre.getText().equals("Nombre")){
+          nombre.setText("");
+          }
+    }//GEN-LAST:event_nombreFocusGained
+
+    private void edadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edadFocusGained
+     if(edad.getText().equals("Edad")){
+          edad.setText("");
+        } 
+    }//GEN-LAST:event_edadFocusGained
+
+    private void pesoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pesoFocusGained
+        if(peso.getText().equals("Peso")){
+          peso.setText("");
+          }
+    }//GEN-LAST:event_pesoFocusGained
+
+    private void estaturaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_estaturaFocusGained
+        if(estatura.getText().equals("Estatura")){
+          estatura.setText("");
+        }    }//GEN-LAST:event_estaturaFocusGained
+
+    private void userFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusGained
+       if(user.getText().equals("Usuario")){
+          user.setText("");
+          }
+    }//GEN-LAST:event_userFocusGained
+
+    private void passFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusGained
+        if(pass.getText().equals("Contraseña")){
+          pass.setText("");
+          }
+    }//GEN-LAST:event_passFocusGained
+
+    private void pesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pesoKeyTyped
+       char validar = evt.getKeyChar();       
+         if(Character.isLetter(validar)){// validacion de no letras
+             getToolkit().beep();
+             evt.consume();
+         }else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45 || (int)evt.getKeyChar()==47
+                 || (int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+                 || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+                 || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255){//validacion de no carateres especiales
+            
+             getToolkit().beep();
+             evt.consume();
+         }
+    }//GEN-LAST:event_pesoKeyTyped
+
+    private void estaturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_estaturaKeyTyped
+        char validar = evt.getKeyChar();       
+         if(Character.isLetter(validar)){// validacion de no letras
+             getToolkit().beep();
+             evt.consume();
+         } else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45 ||  (int)evt.getKeyChar()==47
+                 || (int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+                 || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+                 || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255){//validacion de no carateres especiales
+            
+             getToolkit().beep();
+             evt.consume();
+         }
+    }//GEN-LAST:event_estaturaKeyTyped
 
     /**
      * @param args the command line arguments
