@@ -41,12 +41,33 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
     }
 
     @Override
-    public int sub(int a, int b) throws RemoteException {
-        return a - b;
+    public boolean sub(String user) throws RemoteException {
+          
+        Connection connection = conex();
+       
+        boolean bandera= false; 
+       
+        Statement consulta;
+        String ConsultaLoggin ="select usuario from login where usuario= '"+user+"'";
+        
+        try
+        {
+        consulta = connection.createStatement();
+        ResultSet respuesta = consulta.executeQuery(ConsultaLoggin); 
+             
+            if(respuesta.next()){
+                bandera = true;
+            }   
+        }
+        catch(Exception problem)
+        {
+            
+        }
+     return bandera;   
     }
-
+    
    @Override
-    public String add(String nombre, int edad, float peso, float estatura, String usuario, String contrasena) throws RemoteException {
+    public boolean add(String nombre, int edad, float peso, float estatura, String usuario, String contrasena) throws RemoteException {
       Connection connection = conex();
        
         boolean bandera= true;
@@ -66,19 +87,21 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         insertar.setFloat(5, peso);
         insertar.setFloat(6, estatura);
         
+        insertar.executeUpdate();
+        
         }
         catch(Exception problem)
         {
             bandera= false;
         }
-       if(bandera=true){
-           texto= "Registro Satisfactorio";
-       }else{
-           texto= "No se pudo registrar. INTENTELO MAS TARDE";
-       }
+//       if(bandera=true){
+//           texto= "Registro Satisfactorio";
+//       }else{
+//           texto= "No se pudo registrar. INTENTELO MAS TARDE";
+//       }
         
-     return texto;   
-    // return bandera; 
+    // return texto;   
+     return bandera; 
     }
     
     
@@ -116,9 +139,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
        
         boolean bandera= true;
         String texto = "";
-        String vuelta = user + " "+ password; 
-        
-       
+        String vuelta = user + " "+ password;    
   
        /*
         if(connection != null){
@@ -133,27 +154,24 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         {
         consulta = connection.createStatement();
         ResultSet respuesta = consulta.executeQuery(ConsultaLoggin);
-       
-        
-        
-            while(respuesta.next())
+
+        while(respuesta.next())
             {
                 bandera = false;
               //    String userDB = 
-                              if( respuesta.getString("usuario").trim().equals(user.trim() ) && respuesta.getString("contrasena").trim().equals(password.trim()) )
-                              {
-                                    texto= "BIENVENIDO"+ " "+ user;
-                              }else
-                              {
-                                    texto= "Verifique su usuario y contrasena";
-                              }
+                if( respuesta.getString("usuario").trim().equals(user.trim() ) && 
+                    respuesta.getString("contrasena").trim().equals(password.trim()) )
+                {
+                    texto= "BIENVENIDO"+ " "+ user;
+                }else
+                {
+                    texto= "Verifique su usuario y contrasena";
+                }
             } 
              
             if(bandera){
                 texto= "El"+ " "+ user+ " "+ "No fue encontrado"+ "\n" + "INTENTE DE NUEVO ";
-            }
-        
-        
+            }   
         }
         catch(Exception problem)
         {
