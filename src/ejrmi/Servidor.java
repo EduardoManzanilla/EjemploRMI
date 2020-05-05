@@ -19,7 +19,7 @@ public class Servidor {
      */
     public static void main(String[] args) {
         try{
-            System.setProperty("java.rmi.server.hostname","192.168.0.7");
+            System.setProperty("java.rmi.server.hostname","192.168.0.8");
             Registry r = java.rmi.registry.LocateRegistry.createRegistry(1099);
             //LocateRegisty.getRegistry();
             r.rebind("Calculadora", new rmi());

@@ -56,7 +56,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         ResultSet respuesta = consulta.executeQuery(ConsultaLoggin);
         
         while(respuesta.next())
-            {
+           {
 
                 nombre = respuesta.getString("nombre");
                 System.out.println(nombre);
