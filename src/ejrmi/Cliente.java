@@ -52,14 +52,14 @@ public class Cliente {
                        int x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el primer numero"));
                        int y = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el segundo numero"));
                        
-                            JOptionPane.showMessageDialog(null,"la multiplicación es: " + c.mul(x,y));
+                           // JOptionPane.showMessageDialog(null,"la multiplicación es: " + c.mul(x,y));
                             break;
                    }
                    case "4":{
                        int x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el primer numero"));
                        int y = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el segundo numero"));
                        
-                            JOptionPane.showMessageDialog(null,"la divición es: " + c.div(x,y));
+                      //      JOptionPane.showMessageDialog(null,"la divición es: " + c.div(x,y));
                             break;
                    }
                case "5":{

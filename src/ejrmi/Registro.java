@@ -48,7 +48,7 @@ public class Registro extends javax.swing.JFrame {
         peso = new javax.swing.JTextField();
         estatura = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
-        pass = new javax.swing.JTextField();
+        pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,26 +161,24 @@ public class Registro extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(54, 54, 54))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(106, 106, 106)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                    .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(20, 20, 20)
                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +190,7 @@ public class Registro extends javax.swing.JFrame {
                 .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -249,12 +247,6 @@ public class Registro extends javax.swing.JFrame {
       }
     }//GEN-LAST:event_userFocusLost
 
-    private void passFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusLost
-     if(pass.getText().trim().toLowerCase().equals("Contraseña") || pass.getText().trim().toLowerCase().equals("")){
-          pass.setText("Contraseña");
-      }
-    }//GEN-LAST:event_passFocusLost
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //botón para enviar el registro a la base de datos
       
@@ -267,31 +259,36 @@ public class Registro extends javax.swing.JFrame {
             if(nombre.getText().equals("Nombre") || edad.getText().equals("Edad") || peso.getText().equals("Peso") ||
                     estatura.getText().equals("Estatura") || user.getText().equals("Usuario") || pass.getText().equals("Contraseña")){
                 JOptionPane.showMessageDialog(null, "Existen campos vacios");
-            } else{
+            } else {
               String texto="";
               int eda= Integer.parseInt(edad.getText());
               float pes=Float.parseFloat(peso.getText());
               float estatu= Float.parseFloat(estatura.getText());
               
-              if( c.sub(user.getText())){
-                JOptionPane.showMessageDialog(null, "El usuario ya esta registrado, intente con otro usuario");
-                user.setText("Usuario");
-              }else{
-                if(c.add(nombre.getText(), eda, pes, estatu, user.getText(), pass.getText())){
-                    JOptionPane.showMessageDialog(null, "Registro Satisfactorio");
-                        Login log = new Login();
-                        log.setVisible(true);
-                        log.pack();
-                        log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        this.dispose();
-                 }else{
-                    JOptionPane.showMessageDialog(null, "No se pudo registrar. INTENTELO MAS TARDE");
-                }     
-             }
+              if(eda >=20 && eda <= 59 && nombre.getText().length()<=20){ 
+                if( c.sub(user.getText())){
+                  JOptionPane.showMessageDialog(null, "El usuario ya esta registrado, intente con otro usuario");
+                  user.setText("Usuario");
+                }else{
+                  if(c.add(nombre.getText(), eda, pes, estatu, user.getText(), pass.getText())){
+                      JOptionPane.showMessageDialog(null, "Registro Satisfactorio");
+                          Login log = new Login();
+                          log.setVisible(true);
+                          log.pack();
+                          log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                          this.dispose();
+                   }else{
+                      JOptionPane.showMessageDialog(null, "No se pudo registrar. INTENTELO MAS TARDE");
+                  }     
+               }
+             }else{
+                  JOptionPane.showMessageDialog(null, "Lo sentimos esta aplicación no es recomendada para usted.");
+                   edad.setText("Edad");
+              } 
             }
 
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Servidor no encontrado, intentelo de nuevo" +e);
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado, intentelo de nuevo" );
            // System.out.println(ex); 
     	}
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -349,12 +346,6 @@ public class Registro extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_userFocusGained
 
-    private void passFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusGained
-        if(pass.getText().equals("Contraseña")){
-          pass.setText("");
-          }
-    }//GEN-LAST:event_passFocusGained
-
     private void pesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pesoKeyTyped
        char validar = evt.getKeyChar();       
          if(Character.isLetter(validar)){// validacion de no letras
@@ -402,8 +393,19 @@ public class Registro extends javax.swing.JFrame {
              getToolkit().beep();
              evt.consume();
          }
-         System.out.println((int)evt.getKeyChar());
     }//GEN-LAST:event_nombreKeyTyped
+
+    private void passFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusLost
+      if(pass.getText().trim().toLowerCase().equals("Contraseña") || pass.getText().trim().toLowerCase().equals("")){
+          pass.setText("Contraseña");
+      }
+    }//GEN-LAST:event_passFocusLost
+
+    private void passFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusGained
+         if(pass.getText().equals("Contraseña")){
+          pass.setText("");
+          }
+    }//GEN-LAST:event_passFocusGained
 
     /**
      * @param args the command line arguments
@@ -447,7 +449,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField pass;
+    private javax.swing.JPasswordField pass;
     private javax.swing.JTextField peso;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables

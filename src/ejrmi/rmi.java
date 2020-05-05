@@ -24,19 +24,72 @@ import java.sql.Statement;
 
 
 public class rmi extends UnicastRemoteObject implements Calculadora{
+    
+     private static float imc;
+     private static String nombre;
 
     public rmi() throws RemoteException {
-        int a,b;
+       // int a,b;
     }
 
     @Override
-    public int div(int a, int b) throws RemoteException {
-       return a/b;
+    public void CalcularIMC(float peso, float estatu) throws RemoteException {
+         imc= peso/(estatu*estatu);
     }
 
     @Override
-    public int mul(int a, int b) throws RemoteException {
-        return a * b;
+    public String Clasificacion(String u) throws RemoteException {
+        
+        Connection connection = conex();
+
+        String texto = "";
+        float peso = 0;
+        float estatura = 0;
+       
+  
+        Statement consulta;
+        String ConsultaLoggin ="select nombre, peso, talla from login where usuario= '"+u+"'";
+        
+        try
+        {
+        consulta = connection.createStatement();
+        ResultSet respuesta = consulta.executeQuery(ConsultaLoggin);
+        
+       // while(respuesta.next())
+       //     {
+
+                nombre = respuesta.getString("nombre");
+                peso = respuesta.getFloat("peso");
+                estatura = respuesta.getFloat("talla");
+          //  }
+               CalcularIMC(peso,estatura);
+   
+            String cad="";
+            
+            if(imc<16.00){
+              cad="Infrapeso: Delgadez Severa";
+            }else if(imc<=16.00 || imc<=16.99){
+              cad="Infrapeso: Delgadez moderada";
+            }else if(imc<=17.00 || imc<=18.49){
+              cad="Infrapeso: Delgadez aceptable";
+            }else if(imc<=18.50 || imc<=24.99){
+              cad="Peso Normal";
+            }else if(imc<=25.00 || imc<=29.99){
+              cad="Sobrepeso";
+            }else if(imc<=30.00 || imc<=34.99){
+              cad="Obeso: Tipo I";
+            }else if(imc<=35.00 || imc==40.00){
+              cad="Obeso: Tipo III";
+            }else{
+              cad="no existe clasificacion";
+            }
+              return cad;
+               
+        }
+        catch(Exception problem)
+        {
+            return texto = "Lo sentimos tenemos problemas para calcular su IMC";
+        }
     }
 
     @Override
@@ -109,9 +162,6 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         Connection connection = null;
         String userDB="root";
         String passDB="";
-      //  boolean bandera= true;
-        String texto = "";
-       // String vuelta = user + " "+ password; 
         
         try{
         //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -157,11 +207,11 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         while(respuesta.next())
             {
                 bandera = false;
-              //    String userDB = 
+   
                 if( respuesta.getString("usuario").trim().equals(user.trim() ) && 
                     respuesta.getString("contrasena").trim().equals(password.trim()) )
                 {
-                    texto= "BIENVENIDO"+ " "+ user;
+                    texto= "true";
                 }else
                 {
                     texto= "Verifique su usuario y contrasena";
@@ -182,10 +232,15 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
     // return bandera;
     }
 
-    
-    
-    
-    
+    @Override
+    public float getIMC() throws RemoteException{
+        return imc;
+    }   
+
+    @Override
+    public String getNombre()throws RemoteException {
+       return nombre;
+    }
 }
 
 
