@@ -55,13 +55,14 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         consulta = connection.createStatement();
         ResultSet respuesta = consulta.executeQuery(ConsultaLoggin);
         
-       // while(respuesta.next())
-       //     {
+        while(respuesta.next())
+            {
 
                 nombre = respuesta.getString("nombre");
+                System.out.println(nombre);
                 peso = respuesta.getFloat("peso");
                 estatura = respuesta.getFloat("talla");
-          //  }
+            }
                CalcularIMC(peso,estatura);
    
             String cad="";
@@ -88,7 +89,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         }
         catch(Exception problem)
         {
-            return texto = "Lo sentimos tenemos problemas para calcular su IMC";
+            return texto = "Lo sentimos tenemos problemas para calcular su IMC" + problem;
         }
     }
 
