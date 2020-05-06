@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
 public interface Calculadora extends Remote{
     public float getIMC() throws RemoteException;
     public String getNombre()throws RemoteException;
+    public String getRecomendacion()throws RemoteException;
+    public String getVideo()throws RemoteException;
     public void CalcularIMC(float peso, float estatura) throws RemoteException;
     public String Clasificacion(String u) throws RemoteException;
     public boolean sub(String user) throws RemoteException;
