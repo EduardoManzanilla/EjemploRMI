@@ -41,7 +41,7 @@ public class ControlIMC extends javax.swing.JFrame {
     public void IMC(){
 
           try{
-           String ip= "192.168.0.7";
+           String ip= "192.168.0.8";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -81,6 +81,7 @@ public class ControlIMC extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         texUsuario = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +129,8 @@ public class ControlIMC extends javax.swing.JFrame {
         texUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         texUsuario.setText("Usuario");
 
+        jButton1.setText("Editar Datos");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -145,17 +148,19 @@ public class ControlIMC extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(historial)
-                        .addGap(105, 105, 105)
+                        .addGap(48, 48, 48)
                         .addComponent(jButton2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(67, 67, 67)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(imc, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(clasificacion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(recomendacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(recomendacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jLabel6)
@@ -192,8 +197,9 @@ public class ControlIMC extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(historial)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,7 +227,7 @@ public class ControlIMC extends javax.swing.JFrame {
     }//GEN-LAST:event_imcActionPerformed
 
     private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_historialActionPerformed
 
     /**
@@ -263,6 +269,7 @@ public class ControlIMC extends javax.swing.JFrame {
     private javax.swing.JTextField clasificacion;
     private javax.swing.JButton historial;
     private javax.swing.JTextField imc;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

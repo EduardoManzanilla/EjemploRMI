@@ -12,11 +12,14 @@ package ejrmi;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import javax.swing.JOptionPane;
 
 //
 //import java.sql.Connection;
@@ -268,6 +271,68 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
     public String getVideo() throws RemoteException {
        return video;
     }
+
+    @Override
+    public boolean registrar(float peso, float IMC, String clasificacion, String user)throws RemoteException {
+      
+        Connection connection = conex();
+       
+        boolean bandera= true;
+        String texto = "";
+       
+        PreparedStatement insertar;
+        ResultSet rs = null;
+        String InsertarD ="Insert into bitacora (peso, IMC, clasificacion, creado, usuario) values (?,?,?,?) where usuario= '"+user+"'";
+        java.util.Date Ob = new java.util.Date();
+        Timestamp time = new Timestamp (Ob.getTime());
+        try
+        {
+        insertar = connection.prepareStatement(InsertarD);
+       insertar.setFloat(1, peso);
+        insertar.setFloat(2, IMC);
+        insertar.setString(3, clasificacion);
+        insertar.setTimestamp(4, time);
+        insertar.setString(5, user);
+        if(rs.next()){
+           Date mifechayhora = new Date(rs.getTimestamp(4).getTime());
+        }
+        
+        insertar.executeQuery();
+        
+        
+        }
+        catch(Exception problem)
+        {
+            bandera= false;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         if(bandera=true){
+           texto= "Registro Satisfactorio";
+           JOptionPane.showMessageDialog(null,texto );
+       }else{
+           texto= "No se pudo registrar. INTENTELO MAS TARDE";
+           JOptionPane.showMessageDialog(null,texto );
+       }
+        
+    // return texto;   
+        
+     return bandera;   
+       
+    }
+     public static void main(String[] args) throws RemoteException {
+     rmi r = new rmi();
+     r.registrar(52, (float) 20.829994, "Peso Normal", "root");
+     }
 }
 
 
