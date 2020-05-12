@@ -282,47 +282,34 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
        
         PreparedStatement insertar;
         ResultSet rs = null;
-        String InsertarD ="Insert into bitacora (peso, IMC, clasificacion, creado, usuario) values (?,?,?,?) where usuario= '"+user+"'";
-        java.util.Date Ob = new java.util.Date();
-        Timestamp time = new Timestamp (Ob.getTime());
+        String InsertarD ="Insert into bitacora (peso, IMC, clasificacion, creado, usuario) values (?,?,?,?,?)";
+        java.util.Date d = new java.util.Date();
+        java.sql.Date date2 = new java.sql.Date(d.getTime());
+
         try
         {
+ 
         insertar = connection.prepareStatement(InsertarD);
-       insertar.setFloat(1, peso);
+        insertar.setFloat(1, peso);
         insertar.setFloat(2, IMC);
         insertar.setString(3, clasificacion);
-        insertar.setTimestamp(4, time);
+        insertar.setDate(4, date2);
         insertar.setString(5, user);
-        if(rs.next()){
-           Date mifechayhora = new Date(rs.getTimestamp(4).getTime());
-        }
         
-        insertar.executeQuery();
+        insertar.executeUpdate();
         
-        
+         
+          texto= "Registro Satisfactorio";
+           JOptionPane.showMessageDialog(null,texto );
         }
         catch(Exception problem)
         {
             bandera= false;
+            texto= "No se pudo registrar. INTENTELO MAS TARDE";
+           JOptionPane.showMessageDialog(null,texto + "\n "+ problem );
+            System.out.println(problem);
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-         if(bandera=true){
-           texto= "Registro Satisfactorio";
-           JOptionPane.showMessageDialog(null,texto );
-       }else{
-           texto= "No se pudo registrar. INTENTELO MAS TARDE";
-           JOptionPane.showMessageDialog(null,texto );
-       }
+   
         
     // return texto;   
         

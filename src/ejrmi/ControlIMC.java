@@ -41,7 +41,7 @@ public class ControlIMC extends javax.swing.JFrame {
     public void IMC(){
 
           try{
-           String ip= "192.168.0.8";
+           String ip= "192.168.0.6";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
