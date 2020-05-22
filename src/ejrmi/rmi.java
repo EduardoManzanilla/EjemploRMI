@@ -16,10 +16,12 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import javax.swing.JOptionPane;
+
 
 //
 //import java.sql.Connection;
@@ -316,10 +318,33 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
      return bandera;   
        
     }
-     public static void main(String[] args) throws RemoteException {
-     rmi r = new rmi();
-     r.registrar(52, (float) 20.829994, "Peso Normal", "root");
-     }
+ 
+    @Override
+    public boolean avance(String user) throws RemoteException {
+        Connection connection = conex();
+       
+        boolean bandera= false; 
+       
+        Statement consulta;
+        String consultaTabla ="select peso, IMC, clasificacion, creado from bitacora where usuario= '"+user+"'";
+
+       try
+        {
+        consulta = connection.createStatement();
+        ResultSet respuesta = consulta.executeQuery(consultaTabla); 
+             
+            if(respuesta.next()){
+                bandera = true;
+            }   
+        }
+        catch(Exception problem)
+        {
+            
+        }
+     return bandera; 
+    }
+    
+        
 }
 
 

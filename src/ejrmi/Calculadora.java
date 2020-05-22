@@ -24,5 +24,6 @@ public interface Calculadora extends Remote{
     public boolean add(String nombre, int edad, float peso, float estatura, String usuario, String contraseña) throws RemoteException;
     public String log(String user, String password) throws RemoteException;
     public boolean registrar(float peso, float IMC, String clasificacion,String user )throws RemoteException;
+    public boolean avance(String user)throws RemoteException;
     
 }

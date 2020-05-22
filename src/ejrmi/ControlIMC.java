@@ -34,7 +34,7 @@ public class ControlIMC extends javax.swing.JFrame {
         this.user = us;
     }
     
-    public void vienvenida(String nombre){
+    public void bienvenida(String nombre){
         texUsuario.setText(nombre);
     }
     
@@ -50,7 +50,7 @@ public class ControlIMC extends javax.swing.JFrame {
             
             imc.setText(Float.toString(c.getIMC()));
             
-            vienvenida(c.getNombre());
+            bienvenida(c.getNombre());
             
             recomendacion.setText(c.getRecomendacion());
             
