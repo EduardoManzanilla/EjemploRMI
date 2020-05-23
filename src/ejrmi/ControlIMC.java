@@ -7,6 +7,7 @@ package ejrmi;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -77,11 +78,12 @@ public class ControlIMC extends javax.swing.JFrame {
         videos = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         recomendacion = new javax.swing.JTextField();
-        historial = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        registrarAvance = new javax.swing.JButton();
+        historias = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         texUsuario = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        editarDatos = new javax.swing.JButton();
+        cerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,16 +114,16 @@ public class ControlIMC extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Recomendaciones adicionales:");
 
-        historial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        historial.setText("Registrar Avance");
-        historial.addActionListener(new java.awt.event.ActionListener() {
+        registrarAvance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        registrarAvance.setText("Registrar Avance");
+        registrarAvance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                historialActionPerformed(evt);
+                registrarAvanceActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Informe");
+        historias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        historias.setText("Informe");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Bienvenido");
@@ -129,7 +131,21 @@ public class ControlIMC extends javax.swing.JFrame {
         texUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         texUsuario.setText("Usuario");
 
-        jButton1.setText("Editar Datos");
+        editarDatos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editarDatos.setText("Editar Datos");
+        editarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarDatosActionPerformed(evt);
+            }
+        });
+
+        cerrarSesion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cerrarSesion.setText("cerrar sesión");
+        cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,34 +157,45 @@ public class ControlIMC extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel3)
-                            .addGap(108, 108, 108))
+                            .addContainerGap(442, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel2)
-                            .addGap(98, 98, 98)))
-                    .addComponent(jLabel5)
+                            .addContainerGap(432, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(historial)
-                        .addGap(48, 48, 48)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(67, 67, 67)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(imc, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(clasificacion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(recomendacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(texUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(imc, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(clasificacion, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(recomendacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(historias)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(editarDatos)
+                                                .addGap(26, 26, 26)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cerrarSesion))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(registrarAvance)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(73, 73, 73)
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(texUsuario)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel1)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +223,10 @@ public class ControlIMC extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(historial)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(registrarAvance)
+                    .addComponent(historias)
+                    .addComponent(editarDatos)
+                    .addComponent(cerrarSesion))
                 .addGap(25, 25, 25))
         );
 
@@ -226,9 +254,34 @@ public class ControlIMC extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_imcActionPerformed
 
-    private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
-     
-    }//GEN-LAST:event_historialActionPerformed
+    private void registrarAvanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarAvanceActionPerformed
+      try{
+           String ip= "192.168.0.6";
+           // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
+            Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
+            Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
+            
+           
+            JOptionPane.showMessageDialog(null, c.registrar(c.getIMC(), clasificacion.getText(), user));
+
+                                           
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
+            System.out.println(e); 
+        }
+    }//GEN-LAST:event_registrarAvanceActionPerformed
+
+    private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
+        Login log = new Login();
+        log.setVisible(true);
+        log.pack();
+        log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_cerrarSesionActionPerformed
+
+    private void editarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarDatosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarDatosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,11 +319,11 @@ public class ControlIMC extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cerrarSesion;
     private javax.swing.JTextField clasificacion;
-    private javax.swing.JButton historial;
+    private javax.swing.JButton editarDatos;
+    private javax.swing.JButton historias;
     private javax.swing.JTextField imc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -280,6 +333,7 @@ public class ControlIMC extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField recomendacion;
+    private javax.swing.JButton registrarAvance;
     private javax.swing.JLabel texUsuario;
     private javax.swing.JTextArea videos;
     // End of variables declaration//GEN-END:variables

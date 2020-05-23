@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 public class rmi extends UnicastRemoteObject implements Calculadora{
     
      private static float imc;
+     private static float peso;
      private static String nombre;
      private static String video;
      private static String recomendacion;
@@ -48,7 +49,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         Connection connection = conex();
 
         String texto = "";
-        float peso = 0;
+       // float peso = 0;
         float estatura = 0;
        
   
@@ -273,53 +274,68 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
     }
 
     @Override
-    public boolean registrar(float peso, float IMC, String clasificacion, String user)throws RemoteException {
+    public String registrar(float IMC, String clasificacion, String user)throws RemoteException {
       
         Connection connection = conex();
        
         boolean bandera= true;
         String texto = "";
-       
-        PreparedStatement insertar;
-        ResultSet rs = null;
-        String InsertarD ="Insert into bitacora (peso, IMC, clasificacion, creado, usuario) values (?,?,?,?,?)";
         java.util.Date d = new java.util.Date();
         java.sql.Date date2 = new java.sql.Date(d.getTime());
-
+        
+        Statement consulta;
+        String ConsultaBitacora ="select peso, IMC, clasificacion, creado from bitacora where usuario= '"+user+"' and peso='"+peso+"' and IMC='"+IMC+"'";
+        
         try
         {
- 
-        insertar = connection.prepareStatement(InsertarD);
-        insertar.setFloat(1, peso);
-        insertar.setFloat(2, IMC);
-        insertar.setString(3, clasificacion);
-        insertar.setDate(4, date2);
-        insertar.setString(5, user);
-        
-        insertar.executeUpdate();
-        
-         
-          texto= "Registro Satisfactorio";
-           JOptionPane.showMessageDialog(null,texto );
+        consulta = connection.createStatement();
+        ResultSet respuesta = consulta.executeQuery(ConsultaBitacora); 
+             
+            if(respuesta.next()){
+                bandera = false;
+                texto = "Lo sentimos este avance ya se ha realizado\n Siga las recomendaciones para registrar un nuevo avance";
+            }   
         }
         catch(Exception problem)
         {
-            bandera= false;
-            texto= "No se pudo registrar. INTENTELO MAS TARDE";
-           JOptionPane.showMessageDialog(null,texto + "\n "+ problem );
-            System.out.println(problem);
+          bandera = false;
+          texto="Lo sentimos no se pudo verificar su avance.\n INTENTELO MAS TARDE";
         }
-   
         
-    // return texto;   
+        if(bandera){
+            PreparedStatement insertar;
+            ResultSet rs = null;
+            String InsertarD ="Insert into bitacora (peso, IMC, clasificacion, creado, usuario) values (?,?,?,?,?)";
+
+            try
+            {
+
+                insertar = connection.prepareStatement(InsertarD);
+                insertar.setFloat(1, peso);
+                insertar.setFloat(2, IMC);
+                insertar.setString(3, clasificacion);
+                insertar.setDate(4, date2);
+                insertar.setString(5, user);
+
+                insertar.executeUpdate();
+                texto= "Registro Satisfactorio";
+                 //  JOptionPane.showMessageDialog(null,texto );
+            }
+            catch(Exception problem)
+            {
+                texto= "No se pudo registrar. INTENTELO MAS TARDE";
+    //           JOptionPane.showMessageDialog(null,texto + "\n "+ problem );
+                System.out.println(problem);
+            }  
+        } 
         
-     return bandera;   
+     return texto;   
        
     }
-     public static void main(String[] args) throws RemoteException {
-     rmi r = new rmi();
-     r.registrar(52, (float) 20.829994, "Peso Normal", "root");
-     }
+//     public static void main(String[] args) throws RemoteException {
+//     rmi r = new rmi();
+//     r.registrar(52, (float) 20.829994, "Peso Normal", "root");
+//     }
 }
 
 
