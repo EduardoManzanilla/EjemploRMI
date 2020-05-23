@@ -23,14 +23,35 @@ import javax.swing.JOptionPane;
  *
  * @author Eduardo Manzanilla
  */
-public class Registro extends javax.swing.JFrame {
+public class Registro_1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Registro
      */
-    public Registro() {
+    public Registro_1() {
         initComponents();
          this.setLocationRelativeTo(null);
+    }
+    String usuario="";
+    public void precargarDatos(Object[] datos){
+        try
+        {
+        // while(datos.next())
+          //  {
+                user.setText((String)datos[1]);
+                usuario= user.getText();
+                pass.setText((String)datos[2]);
+                nombre.setText((String)datos[3]);
+                edad.setText((String)datos[4]);
+                peso.setText((String)datos[5]);
+                estatura.setText((String)datos[6]);
+            //} 
+        }
+        catch(Exception problem)
+        {
+            String texto= "No se pudo cargar sus datos.\n INTENTELO MAS TARDE";
+            JOptionPane.showMessageDialog(null,texto + "\n "+ problem ); 
+        }
     }
 
     /**
@@ -54,9 +75,9 @@ public class Registro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36))); // NOI18N
 
-        jButton1.setText("Enviar");
+        jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -163,7 +184,7 @@ public class Registro extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(54, 54, 54))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -219,18 +240,6 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void edadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edadFocusLost
-       if(edad.getText().trim().toLowerCase().equals("Edad") || edad.getText().trim().toLowerCase().equals("")){
-          edad.setText("Edad");
-      }   // TODO add your handling code here:
-    }//GEN-LAST:event_edadFocusLost
-
-    private void nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusLost
-        if(nombre.getText().trim().toLowerCase().equals("Nombre") || nombre.getText().trim().toLowerCase().equals("")){
-          nombre.setText("Nombre");
-      }  // TODO add your handling code here:
-    }//GEN-LAST:event_nombreFocusLost
-
     private void pesoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pesoFocusLost
          if(peso.getText().trim().toLowerCase().equals("Peso") || peso.getText().trim().toLowerCase().equals("")){
           peso.setText("Peso");
@@ -271,10 +280,10 @@ public class Registro extends javax.swing.JFrame {
                 if( c.sub(user.getText())){
                   JOptionPane.showMessageDialog(null, "El usuario ya esta registrado, intente con otro usuario");
                   user.setText("Usuario");
-                }else{
-                  if(c.add(nombre.getText(), eda, pes, estatu, user.getText(), pass.getText())){
+                }else{              
+                  if(c.add2(nombre.getText(), eda, pes, estatu, usuario,user.getText(), pass.getText())){
                       JOptionPane.showMessageDialog(null, "Registro Satisfactorio");
-                          Login log = new Login();
+                          ControlIMC log = new ControlIMC(user.getText());
                           log.setVisible(true);
                           log.pack();
                           log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -296,7 +305,7 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       Login log = new Login();
+       ControlIMC log = new ControlIMC(user.getText());
        log.setVisible(true);
        log.pack();
        log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -318,18 +327,6 @@ public class Registro extends javax.swing.JFrame {
              evt.consume();
          }
     }//GEN-LAST:event_edadKeyTyped
-
-    private void nombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusGained
-         if(nombre.getText().equals("Nombre")){
-          nombre.setText("");
-          }
-    }//GEN-LAST:event_nombreFocusGained
-
-    private void edadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edadFocusGained
-     if(edad.getText().equals("Edad")){
-          edad.setText("");
-        } 
-    }//GEN-LAST:event_edadFocusGained
 
     private void pesoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pesoFocusGained
         if(peso.getText().equals("Peso")){
@@ -409,6 +406,30 @@ public class Registro extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_passFocusGained
 
+    private void edadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edadFocusLost
+        if(edad.getText().trim().toLowerCase().equals("Edad") || edad.getText().trim().toLowerCase().equals("")){
+            edad.setText("Edad");
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_edadFocusLost
+
+    private void edadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edadFocusGained
+        if(edad.getText().equals("Edad")){
+            edad.setText("");
+        }
+    }//GEN-LAST:event_edadFocusGained
+
+    private void nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusLost
+        if(nombre.getText().trim().toLowerCase().equals("Nombre") || nombre.getText().trim().toLowerCase().equals("")){
+            nombre.setText("Nombre");
+        }  // TODO add your handling code here:
+    }//GEN-LAST:event_nombreFocusLost
+
+    private void nombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusGained
+        if(nombre.getText().equals("Nombre")){
+            nombre.setText("");
+        }
+    }//GEN-LAST:event_nombreFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -439,7 +460,7 @@ public class Registro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registro().setVisible(true);
+                //new Registro_1().setVisible(true);
             }
         });
     }

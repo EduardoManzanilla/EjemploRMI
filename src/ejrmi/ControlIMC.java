@@ -9,6 +9,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 /**
  *
@@ -35,14 +37,14 @@ public class ControlIMC extends javax.swing.JFrame {
         this.user = us;
     }
     
-    public void vienvenida(String nombre){
+    public void bienvenida(String nombre){
         texUsuario.setText(nombre);
     }
     
     public void IMC(){
 
           try{
-           String ip= "192.168.0.6";
+           String ip= "192.168.0.3";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -51,11 +53,17 @@ public class ControlIMC extends javax.swing.JFrame {
             
             imc.setText(Float.toString(c.getIMC()));
             
-            vienvenida(c.getNombre());
+            bienvenida(c.getNombre());
             
             recomendacion.setText(c.getRecomendacion());
             
             videos.setText(c.getVideo());
+            
+            imc.setEditable(false);
+            clasificacion.setEditable(false);
+            recomendacion.setEditable(false);
+            videos.setEditable(false);
+            
                                            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
@@ -79,7 +87,7 @@ public class ControlIMC extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         recomendacion = new javax.swing.JTextField();
         registrarAvance = new javax.swing.JButton();
-        historias = new javax.swing.JButton();
+        historial = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         texUsuario = new javax.swing.JLabel();
         editarDatos = new javax.swing.JButton();
@@ -122,8 +130,13 @@ public class ControlIMC extends javax.swing.JFrame {
             }
         });
 
-        historias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        historias.setText("Informe");
+        historial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        historial.setText("Informe");
+        historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historialActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Bienvenido");
@@ -154,13 +167,11 @@ public class ControlIMC extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addContainerGap(442, Short.MAX_VALUE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addContainerGap(432, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(432, 432, 432))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -177,7 +188,7 @@ public class ControlIMC extends javax.swing.JFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(historias)
+                                                .addComponent(historial)
                                                 .addGap(34, 34, 34)
                                                 .addComponent(editarDatos)
                                                 .addGap(26, 26, 26)))
@@ -224,7 +235,7 @@ public class ControlIMC extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrarAvance)
-                    .addComponent(historias)
+                    .addComponent(historial)
                     .addComponent(editarDatos)
                     .addComponent(cerrarSesion))
                 .addGap(25, 25, 25))
@@ -256,7 +267,7 @@ public class ControlIMC extends javax.swing.JFrame {
 
     private void registrarAvanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarAvanceActionPerformed
       try{
-           String ip= "192.168.0.6";
+           String ip= "192.168.0.3";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -280,8 +291,30 @@ public class ControlIMC extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void editarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarDatosActionPerformed
-        // TODO add your handling code here:
+       Registro_1 regi = new Registro_1();
+       regi.setVisible(true);
+       regi.pack();
+        try{
+            
+           String ip= "192.168.0.3";
+           // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
+            Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
+            Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
+            
+            regi.precargarDatos(c.editar(user));
+                                      
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
+            System.out.println(e); 
+        }
+      
+       regi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       this.dispose();
     }//GEN-LAST:event_editarDatosActionPerformed
+
+    private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
+       
+    }//GEN-LAST:event_historialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,7 +355,7 @@ public class ControlIMC extends javax.swing.JFrame {
     private javax.swing.JButton cerrarSesion;
     private javax.swing.JTextField clasificacion;
     private javax.swing.JButton editarDatos;
-    private javax.swing.JButton historias;
+    private javax.swing.JButton historial;
     private javax.swing.JTextField imc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

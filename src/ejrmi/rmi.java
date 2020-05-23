@@ -16,10 +16,12 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import javax.swing.JOptionPane;
+
 
 //
 //import java.sql.Connection;
@@ -190,7 +192,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
        // String connectionDB = "jdbc:sqlserver://LAPTOP-ML0NLCLN:1433;databaseName=donto";
         String connectionDB = "jdbc:mysql://localhost:3306/rmi";
         connection =DriverManager.getConnection(connectionDB, userDB, passDB);
-        
+            //System.out.println("conexion exitosa");
         }catch(ClassNotFoundException e){
             System.out.println("Error: "+ e.getMessage());
         }catch(SQLException e){
@@ -284,7 +286,7 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         java.sql.Date date2 = new java.sql.Date(d.getTime());
         
         Statement consulta;
-        String ConsultaBitacora ="select peso, IMC, clasificacion, creado from bitacora where usuario= '"+user+"' and peso='"+peso+"' and IMC='"+IMC+"'";
+        String ConsultaBitacora ="select* from bitacora where usuario= '"+user+"' && peso= "+peso;
         
         try
         {
@@ -332,10 +334,118 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
      return texto;   
        
     }
+ 
+    @Override
+    public ResultSet avance(String user) throws RemoteException {
+        Connection connection = conex();
+       
+        boolean bandera= false; 
+       
+        Statement consulta;
+        String consultaTabla ="select peso, IMC, clasificacion, creado from bitacora where usuario= '"+user+"'";
+        ResultSet respuesta2=null;
+       try
+        {
+        consulta = connection.createStatement();
+        ResultSet respuesta = consulta.executeQuery(consultaTabla); 
+         return respuesta;   
+        }
+        catch(Exception problem)
+        {
+            
+        }
+     return respuesta2; 
+    }
+    
+        
 //     public static void main(String[] args) throws RemoteException {
 //     rmi r = new rmi();
-//     r.registrar(52, (float) 20.829994, "Peso Normal", "root");
+//    // r.registrar(52, (float) 20.829994, "Peso Normal", "root");
+//       // r.editar("root");
+//         System.out.println(r.editar("root"));
 //     }
+
+    @Override
+    public Object[] editar(String user) throws RemoteException {
+         Connection connection = conex();
+       
+      //  boolean bandera= false; 
+        Object array[]=new Object[7];
+       
+        //ResultSet respuesta=null;
+        
+       try
+        {
+            //System.out.println("entramos");
+        Statement consulta;
+        String consultaLogin ="select * from login where usuario= '"+user+"'";
+        consulta = connection.createStatement();
+        ResultSet respuesta = consulta.executeQuery(consultaLogin); 
+        
+    
+          
+        while(respuesta.next()){
+            
+           // for (int i = 0; i < 10; i++) {
+		array[0] = respuesta.getInt("idUsuario");
+                array[1] = respuesta.getString("usuario");
+                array[2] = respuesta.getString("contrasena");
+                array[3] = respuesta.getString("nombre");
+                array[4] = respuesta.getString("edad");
+                array[5] = respuesta.getString("peso");
+                array[6] = respuesta.getString("talla");
+                
+            //}
+               //System.out.println(respuesta.getString("edad"));
+         }
+        
+        }
+        catch(Exception problem)
+        {
+             String texto= "No se pudo registrar.\n INTENTELO MAS TARDE";
+             JOptionPane.showMessageDialog(null,texto + "\n "+ problem );
+        }
+        return array;
+    }
+
+    @Override
+    public boolean add2(String nombre, int edad, float peso, float estatura, String usuario, String user, String contraseña) throws RemoteException {
+        Connection connection = conex();
+       
+        boolean bandera= true;
+        String texto = "";
+       
+        PreparedStatement modificar;
+        ResultSet rs;
+        String ModificarLoggin ="Update login set usuario=?, contrasena=?, nombre=?, edad=?, peso=?, talla=? where usuario= '"+usuario+"'";
+
+        try
+        {
+        modificar = connection.prepareStatement(ModificarLoggin);
+        modificar.setString(1, user);
+        modificar.setString(2, contraseña);
+        modificar.setString(3, nombre);
+        modificar.setInt(4, edad);
+        modificar.setFloat(5, peso);
+        modificar.setFloat(6, estatura);
+        
+        modificar.executeUpdate();
+        
+        }
+        catch(Exception problem)
+        {
+            JOptionPane.showMessageDialog(null, "ALgo esta mal en la modificacion ");
+            bandera= false;
+        }
+//       if(bandera=true){
+//           texto= "Registro Satisfactorio";
+//       }else{
+//           texto= "No se pudo registrar. INTENTELO MAS TARDE";
+//       }
+        
+    // return texto;   
+     return bandera; 
+    }
 }
 
 
