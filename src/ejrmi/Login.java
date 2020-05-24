@@ -12,6 +12,7 @@ import java.rmi.registry.Registry;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Eduardo Manzanilla
@@ -59,6 +60,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36))); // NOI18N
         jPanel1.setName(""); // NOI18N
+        jPanel1.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel2.setText("Usuario");
@@ -143,7 +145,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        try{
-           String ip= "192.168.0.4";
+           String ip= "192.168.0.8";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");

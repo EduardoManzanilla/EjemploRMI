@@ -19,7 +19,7 @@ public class Cliente {
     public static void main(String[]args){
         Scanner sc = new Scanner(System.in);
         try{
-           String ip= "192.168.0.7";
+           String ip= "192.168.0.8";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
