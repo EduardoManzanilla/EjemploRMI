@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,6 +30,8 @@ public class ControlIMC extends javax.swing.JFrame {
         setUser(use);
         IMC();
     }
+    
+    
 
     public String getUser() {
         return user;
@@ -44,7 +48,7 @@ public class ControlIMC extends javax.swing.JFrame {
     public void IMC(){
 
           try{
-           String ip= "192.168.0.3";
+           String ip= "192.168.0.4";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -66,7 +70,7 @@ public class ControlIMC extends javax.swing.JFrame {
             
                                            
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado en el IMC de ControlIMC\n" + "INTENTELO MAS TARDE");
             System.out.println(e); 
         }
     }
@@ -267,7 +271,7 @@ public class ControlIMC extends javax.swing.JFrame {
 
     private void registrarAvanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarAvanceActionPerformed
       try{
-           String ip= "192.168.0.3";
+           String ip= "192.168.0.4";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -277,7 +281,7 @@ public class ControlIMC extends javax.swing.JFrame {
 
                                            
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado en registrar avance en el ControlIMC\n" + "INTENTELO MAS TARDE");
             System.out.println(e); 
         }
     }//GEN-LAST:event_registrarAvanceActionPerformed
@@ -291,29 +295,54 @@ public class ControlIMC extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void editarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarDatosActionPerformed
-       Registro_1 regi = new Registro_1();
-       regi.setVisible(true);
-       regi.pack();
+       Registro_1 edtext = new Registro_1();
+       edtext.setVisible(true);
+       edtext.pack();
         try{
             
-           String ip= "192.168.0.3";
+           String ip= "192.168.0.4";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
             
-            regi.precargarDatos(c.editar(user));
+            edtext.precargarDatos(c.editar(user));
                                       
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
             System.out.println(e); 
         }
       
-       regi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       edtext.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.dispose();
     }//GEN-LAST:event_editarDatosActionPerformed
 
     private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
-       
+//         Tabla regi = new Tabla();
+//         regi.setVisible(true);
+//         regi.pack();
+       // List<bitacoraLista> list= new ArrayList<bitacoraLista>();
+        /*try{
+            
+           String ip= "192.168.0.4";
+           // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
+            Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
+            Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
+            
+           list= c.avance(user);
+            
+           // regi.precargarDatos(c.editar(user));
+                                      
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + "INTENTELO MAS TARDE");
+            System.out.println(e); 
+        }
+        */
+         Tabla regi = new Tabla(user);
+             regi.setVisible(true);
+             regi.pack(); 
+             regi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             this.dispose();
+        
     }//GEN-LAST:event_historialActionPerformed
 
     /**

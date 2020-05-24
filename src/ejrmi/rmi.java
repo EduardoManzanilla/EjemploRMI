@@ -20,6 +20,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -179,9 +181,8 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
      return bandera; 
     }
     
-    
-    public Connection conex (){
-        
+
+    public static Connection conex (){
         Connection connection = null;
         String userDB="root";
         String passDB="";
@@ -333,36 +334,13 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         
      return texto;   
        
-    }
- 
-    @Override
-    public ResultSet avance(String user) throws RemoteException {
-        Connection connection = conex();
-       
-        boolean bandera= false; 
-       
-        Statement consulta;
-        String consultaTabla ="select peso, IMC, clasificacion, creado from bitacora where usuario= '"+user+"'";
-        ResultSet respuesta2=null;
-       try
-        {
-        consulta = connection.createStatement();
-        ResultSet respuesta = consulta.executeQuery(consultaTabla); 
-         return respuesta;   
-        }
-        catch(Exception problem)
-        {
-            
-        }
-     return respuesta2; 
-    }
-    
-        
+    }        
 //     public static void main(String[] args) throws RemoteException {
 //     rmi r = new rmi();
 //    // r.registrar(52, (float) 20.829994, "Peso Normal", "root");
 //       // r.editar("root");
-//         System.out.println(r.editar("root"));
+//        // System.out.println(r.editar("root"));
+//        r.add2Complemento("hola", "root");
 //     }
 
     @Override
@@ -381,12 +359,9 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
         String consultaLogin ="select * from login where usuario= '"+user+"'";
         consulta = connection.createStatement();
         ResultSet respuesta = consulta.executeQuery(consultaLogin); 
-        
     
-          
         while(respuesta.next()){
-            
-           // for (int i = 0; i < 10; i++) {
+
 		array[0] = respuesta.getInt("idUsuario");
                 array[1] = respuesta.getString("usuario");
                 array[2] = respuesta.getString("contrasena");
@@ -394,11 +369,8 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
                 array[4] = respuesta.getString("edad");
                 array[5] = respuesta.getString("peso");
                 array[6] = respuesta.getString("talla");
-                
-            //}
-               //System.out.println(respuesta.getString("edad"));
-         }
-        
+
+         }  
         }
         catch(Exception problem)
         {
@@ -409,43 +381,57 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
     }
 
     @Override
-    public boolean add2(String nombre, int edad, float peso, float estatura, String usuario, String user, String contraseña) throws RemoteException {
+    public boolean add2(String nombre, int edad, float peso, float estatura, String usuario, String contraseña) throws RemoteException {
         Connection connection = conex();
        
         boolean bandera= true;
         String texto = "";
        
         PreparedStatement modificar;
-        ResultSet rs;
-        String ModificarLoggin ="Update login set usuario=?, contrasena=?, nombre=?, edad=?, peso=?, talla=? where usuario= '"+usuario+"'";
-
+        
+        String ModificarLoggin ="Update login set  contrasena=?, nombre=?, edad=?, peso=?, talla=? where usuario= '"+usuario.trim()+"'";
+       
         try
         {
         modificar = connection.prepareStatement(ModificarLoggin);
-        modificar.setString(1, user);
-        modificar.setString(2, contraseña);
-        modificar.setString(3, nombre);
-        modificar.setInt(4, edad);
-        modificar.setFloat(5, peso);
-        modificar.setFloat(6, estatura);
+       
+        modificar.setString(1, contraseña);
+        modificar.setString(2, nombre);
+        modificar.setInt(3, edad);
+        modificar.setFloat(4, peso);
+        modificar.setFloat(5, estatura);
         
         modificar.executeUpdate();
-        
+
         }
         catch(Exception problem)
         {
             JOptionPane.showMessageDialog(null, "ALgo esta mal en la modificacion ");
             bandera= false;
         }
-//       if(bandera=true){
-//           texto= "Registro Satisfactorio";
-//       }else{
-//           texto= "No se pudo registrar. INTENTELO MAS TARDE";
-//       }
-        
-    // return texto;   
      return bandera; 
     }
+
+  
+    public static ResultSet getTabla(String consulta) {
+        Connection connection = conex();
+        
+        Statement st;
+        ResultSet dato= null;
+      
+       try
+        {
+        st = connection.createStatement();
+        dato = st.executeQuery(consulta);   
+        }
+        catch(Exception problem)
+        {
+           // return dato;
+            JOptionPane.showMessageDialog(null,"Lo sentimos tenemos problemas al visualizar sus avances" );
+        }
+       return dato;
+    }
+
 }
 
 

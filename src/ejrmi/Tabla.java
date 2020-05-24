@@ -5,6 +5,18 @@
  */
 package ejrmi;
 
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author al_re
@@ -14,8 +26,33 @@ public class Tabla extends javax.swing.JFrame {
     /**
      * Creates new form Tabla
      */
-    public Tabla() {
+    String usuario;
+    public Tabla(String user) {
         initComponents();
+        //this.setLocationRelativeTo(null);
+        //tabla(datos);
+        this.usuario=user;
+        mostrar();
+    }
+    
+   public void mostrar(){
+        
+            DefaultTableModel modelo = new DefaultTableModel();
+            ResultSet rs = rmi.getTabla("select * from bitacora where usuario= '"+usuario+"'");
+             modelo.setColumnIdentifiers(new Object[]{"Peso","IMC","Clasificacion","Fecha"});
+          try{
+                while(rs.next()){
+                    System.out.println(rs.getString("peso") + rs.getString("IMC")+ rs.getString("clasificacion")+  rs.getString("creado"));
+                     
+                    modelo.addRow(new Object[]{rs.getString("peso"),rs.getString("IMC"),rs.getString("clasificacion"), rs.getString("creado")});
+                }
+                jTableAvance.setModel(modelo);
+                                            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Servidor no encontrado\n" + e);
+            System.out.println(e); 
+        }
+           
     }
 
     /**
@@ -123,7 +160,7 @@ public class Tabla extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tabla().setVisible(true);
+                //new Tabla().setVisible(true);
             }
         });
     }

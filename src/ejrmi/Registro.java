@@ -253,7 +253,7 @@ public class Registro extends javax.swing.JFrame {
         //botón para enviar el registro a la base de datos
       
         try{
-           String ip= "192.168.0.3";
+           String ip= "192.168.0.4";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");

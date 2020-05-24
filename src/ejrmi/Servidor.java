@@ -18,18 +18,18 @@ public class Servidor {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try{
-            System.setProperty("java.rmi.server.hostname","192.168.0.3");
+        try {
+            System.setProperty("java.rmi.server.hostname", "192.168.0.4");
             Registry r = java.rmi.registry.LocateRegistry.createRegistry(1099);
             //LocateRegisty.getRegistry();
             r.rebind("Calculadora", new rmi());
             JOptionPane.showMessageDialog(null, "Servidor Conectado");
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Servidor no Conectado" + e);
         }
     }
-    
+
 }
 
 

@@ -31,21 +31,21 @@ public class Registro_1 extends javax.swing.JFrame {
     public Registro_1() {
         initComponents();
          this.setLocationRelativeTo(null);
+         
     }
     String usuario="";
     public void precargarDatos(Object[] datos){
         try
         {
-        // while(datos.next())
-          //  {
-                user.setText((String)datos[1]);
-                usuario= user.getText();
+               
+                this.usuario= (String)datos[1];
                 pass.setText((String)datos[2]);
                 nombre.setText((String)datos[3]);
                 edad.setText((String)datos[4]);
                 peso.setText((String)datos[5]);
                 estatura.setText((String)datos[6]);
-            //} 
+               
+
         }
         catch(Exception problem)
         {
@@ -70,7 +70,6 @@ public class Registro_1 extends javax.swing.JFrame {
         edad = new javax.swing.JTextField();
         peso = new javax.swing.JTextField();
         estatura = new javax.swing.JTextField();
-        user = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,17 +154,6 @@ public class Registro_1 extends javax.swing.JFrame {
             }
         });
 
-        user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        user.setText("Usuario");
-        user.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                userFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                userFocusLost(evt);
-            }
-        });
-
         pass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pass.setText("Contraseña");
         pass.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -194,7 +182,6 @@ public class Registro_1 extends javax.swing.JFrame {
                     .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -203,15 +190,13 @@ public class Registro_1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -252,23 +237,17 @@ public class Registro_1 extends javax.swing.JFrame {
       }
     }//GEN-LAST:event_estaturaFocusLost
 
-    private void userFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusLost
-       if(user.getText().trim().toLowerCase().equals("Usuario") || user.getText().trim().toLowerCase().equals("")){
-          user.setText("Usuario");
-      }
-    }//GEN-LAST:event_userFocusLost
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //botón para enviar el registro a la base de datos
       
         try{
-           String ip= "192.168.0.3";
+           String ip= "192.168.0.4";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
             
             if(nombre.getText().equals("Nombre") || edad.getText().equals("Edad") || peso.getText().equals("Peso") ||
-                    estatura.getText().equals("Estatura") || user.getText().equals("Usuario") || pass.getText().equals("Contraseña")){
+                    estatura.getText().equals("Estatura")  || pass.getText().equals("Contraseña")){
                 JOptionPane.showMessageDialog(null, "Existen campos vacios");
             } else {
               String texto="";
@@ -277,13 +256,10 @@ public class Registro_1 extends javax.swing.JFrame {
               float estatu= Float.parseFloat(estatura.getText());
               
               if(eda >=20 && eda <= 59 && nombre.getText().length()<=20){ 
-                if( c.sub(user.getText())){
-                  JOptionPane.showMessageDialog(null, "El usuario ya esta registrado, intente con otro usuario");
-                  user.setText("Usuario");
-                }else{              
-                  if(c.add2(nombre.getText(), eda, pes, estatu, usuario,user.getText(), pass.getText())){
+                             
+                  if(c.add2(nombre.getText(), eda, pes, estatu, usuario, pass.getText()) ){
                       JOptionPane.showMessageDialog(null, "Registro Satisfactorio");
-                          ControlIMC log = new ControlIMC(user.getText());
+                          ControlIMC log = new ControlIMC(usuario);
                           log.setVisible(true);
                           log.pack();
                           log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -291,7 +267,6 @@ public class Registro_1 extends javax.swing.JFrame {
                    }else{
                       JOptionPane.showMessageDialog(null, "No se pudo registrar. INTENTELO MAS TARDE");
                   }     
-               }
              }else{
                   JOptionPane.showMessageDialog(null, "Lo sentimos esta aplicación no es recomendada para usted.");
                    edad.setText("Edad");
@@ -305,7 +280,7 @@ public class Registro_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       ControlIMC log = new ControlIMC(user.getText());
+       ControlIMC log = new ControlIMC(usuario);
        log.setVisible(true);
        log.pack();
        log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -338,12 +313,6 @@ public class Registro_1 extends javax.swing.JFrame {
         if(estatura.getText().equals("Estatura")){
           estatura.setText("");
         }    }//GEN-LAST:event_estaturaFocusGained
-
-    private void userFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusGained
-       if(user.getText().equals("Usuario")){
-          user.setText("");
-          }
-    }//GEN-LAST:event_userFocusGained
 
     private void pesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pesoKeyTyped
        char validar = evt.getKeyChar();       
@@ -474,6 +443,5 @@ public class Registro_1 extends javax.swing.JFrame {
     private javax.swing.JTextField nombre;
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField peso;
-    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }
