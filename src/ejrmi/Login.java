@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        try{
-           String ip= "192.168.0.8";
+           String ip= "192.168.0.6";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");

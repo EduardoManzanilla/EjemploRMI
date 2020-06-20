@@ -12,11 +12,10 @@ package ejrmi;
  */
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.ResultSet;
-import java.util.List;
-//import java.awt.List;
+
 
 public interface Calculadora extends Remote{
+    
     public float getIMC() throws RemoteException;
     public String getNombre()throws RemoteException;
     public String getRecomendacion()throws RemoteException;
@@ -26,7 +25,6 @@ public interface Calculadora extends Remote{
     public boolean sub(String user) throws RemoteException;
     public boolean add(String nombre, int edad, float peso, float estatura, String usuario, String contraseña) throws RemoteException;
     public boolean add2(String nombre, int edad, float peso, float estatura, String usuario, String contraseña)throws RemoteException;
-    //public boolean add2Complemento(String usuarioViejo, String userNuevo)throws RemoteException;
     public String log(String user, String password) throws RemoteException;
     public String registrar(float IMC,String clasificaion, String user )throws RemoteException;
     public Object[] editar(String user)throws RemoteException;

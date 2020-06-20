@@ -81,30 +81,34 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
               cad="Infrapeso: Delgadez Severa";
               video="https://youtu.be/u5XWTI-Dh2E";
               recomendacion="Comunicarse con un nutriologo para diseñar una dieta lo máss personalizada posible";
-            }else if(imc<=16.00 || imc<=16.99){
+            }else if(imc>=16.00 && imc<=16.99){
               cad="Infrapeso: Delgadez moderada";
               video="https://youtu.be/n4QcaTD7E7U";
               recomendacion="Aumenta la ingesta de cereales, frutas, lacteos, carnes y aceites saludables";
-            }else if(imc<=17.00 || imc<=18.49){
+            }else if(imc>=17.00 && imc<=18.49){
               cad="Infrapeso: Delgadez aceptable";
               video="https://youtu.be/LS56C5L8kU8";
               recomendacion="Aumenta la ingesta de proteÃ­nas, te sacian más y ayudan a aumentar la masa muscular";
-            }else if(imc<=18.50 || imc<=24.99){
+            }else if(imc>=18.50 && imc<=24.99){
               cad="Peso Normal";
               video="https://youtu.be/1Gx1KYNn7I4";
               recomendacion="Entrenar 3 a 5 veces por semana";
-            }else if(imc<=25.00 || imc<=29.99){
+            }else if(imc>=25.00 && imc<=29.99){
               cad="Sobrepeso";
               video="https://youtu.be/dpSp5YWURXM";
               recomendacion="Reducir el consumo de azucar agregado y jarabe de maiz de alta fructosa";
-            }else if(imc<=30.00 || imc<=34.99){
+            }else if(imc>=30.00 && imc<=34.99){
               cad="Obeso: Tipo I";
               video="https://youtu.be/oD_3kK1l6HQ";
               recomendacion="Controlar las cantidades de comida y disminuir o evitar el consumo de alcohol y de sal";
-            }else if(imc<=35.00 || imc==40.00){
-              cad="Obeso: Tipo III";
+            }else if(imc>=35.00 && imc<=39.99){
+              cad="Obeso: Tipo II";
               video="https://youtu.be/4_yBelxSi7M";
               recomendacion="Disponer de un metodo o dieta confiable y respetuoso con el que poder manejar los alimentos y las raciones (se recomienda ir con nutriologo";
+            }else if(imc>=40.00 ){
+              cad="Obeso: Tipo III";
+              video="https://youtu.be/3vR6BkGeVA8";
+              recomendacion="Disminuir el consumo de azucares y grasas. Se le recomienda consultar un nutriólogo.";
             }else{
               cad="no existe clasificacion";
             }
@@ -312,7 +316,6 @@ public class rmi extends UnicastRemoteObject implements Calculadora{
 
             try
             {
-
                 insertar = connection.prepareStatement(InsertarD);
                 insertar.setFloat(1, peso);
                 insertar.setFloat(2, IMC);

@@ -5,6 +5,18 @@
  */
 package ejrmi;
 
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.BaseColor;
+import java.io.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.Connection;
@@ -13,9 +25,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -27,9 +44,10 @@ public class Tabla extends javax.swing.JFrame {
      * Creates new form Tabla
      */
     String usuario;
+    //private static final Font categoryFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     public Tabla(String user) {
         initComponents();
-        //this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         //tabla(datos);
         this.usuario=user;
         mostrar();
@@ -42,7 +60,7 @@ public class Tabla extends javax.swing.JFrame {
              modelo.setColumnIdentifiers(new Object[]{"Peso","IMC","Clasificacion","Fecha"});
           try{
                 while(rs.next()){
-                    System.out.println(rs.getString("peso") + rs.getString("IMC")+ rs.getString("clasificacion")+  rs.getString("creado"));
+                    //System.out.println(rs.getString("peso") + rs.getString("IMC")+ rs.getString("clasificacion")+  rs.getString("creado"));
                      
                     modelo.addRow(new Object[]{rs.getString("peso"),rs.getString("IMC"),rs.getString("clasificacion"), rs.getString("creado")});
                 }
@@ -68,6 +86,7 @@ public class Tabla extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAvance = new javax.swing.JTable();
         aceptar = new javax.swing.JButton();
+        PFD = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +120,14 @@ public class Tabla extends javax.swing.JFrame {
             }
         });
 
+        PFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PFD.setText("Generar PDF");
+        PFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PFDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -110,7 +137,9 @@ public class Tabla extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
+                .addComponent(PFD)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(aceptar)
                 .addGap(57, 57, 57))
         );
@@ -118,10 +147,12 @@ public class Tabla extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(aceptar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aceptar)
+                    .addComponent(PFD))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,6 +183,133 @@ public class Tabla extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_aceptarActionPerformed
 
+    private void PFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PFDActionPerformed
+         String pat="";
+        
+         JFileChooser j = new JFileChooser();
+         
+         j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+         int x = j.showSaveDialog(this);
+         
+         if(x==JFileChooser.APPROVE_OPTION){
+             pat=j.getSelectedFile().getPath();          
+         }
+         System.out.println("lo que dice mi path");
+         System.out.println(pat);
+         
+         Document doc = new Document();
+         
+  
+       try {
+         
+           File file = new File(pat,"/Archivo.pdf");
+           PdfWriter.getInstance(doc, new FileOutputStream(file));
+           doc.open();
+           
+           Paragraph titulo = new Paragraph("Historial de Avance \n\n", 
+            FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+           
+      
+      //   Anchor anchor = new Anchor("Table export to PDF (Exportamos la tabla a PDF)", categoryFont);
+        // anchor.setName("Table export to PDF (Exportamos la tabla a PDF)");
+           //doc.addTitle("HISTORIAL DE AVANCES");
+           doc.add(titulo);
+           
+           PdfPTable t = new PdfPTable(4);
+           
+           t.addCell("Peso");
+           t.addCell("IMC");
+           t.addCell("clasificación");//
+           t.addCell("Fecha");
+           
+           for(int i = 0 ; i<jTableAvance.getRowCount(); i++){
+               
+               String peso= jTableAvance.getValueAt(i, 0).toString();
+               String imc= jTableAvance.getValueAt(i, 1).toString();
+               String clas= jTableAvance.getValueAt(i, 2).toString();
+               String fech= jTableAvance.getValueAt(i, 3).toString();
+               
+               t.addCell(peso);
+               t.addCell(imc);
+               t.addCell(clas);
+               t.addCell(fech);
+           }
+           
+           doc.add(t);
+            
+           
+       } catch (FileNotFoundException fileNotFoundException) {
+             Logger.getLogger(Tabla.class.getName()).log(Level.SEVERE, null, fileNotFoundException);
+       } catch (DocumentException ex) {
+            Logger.getLogger(Tabla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       doc.close();
+    }//GEN-LAST:event_PFDActionPerformed
+/*
+    public void utilJTableToPdf(JTable jTable, File pdfNewFile, String title){    
+    try {
+        // We create the document and set the file name.        
+        // Creamos el documento e indicamos el nombre del fichero.
+        Document document = new Document();
+      //  try {
+            PdfWriter.getInstance(document, new FileOutputStream(pdfNewFile));
+       // } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("No such file was found to generate the PDF (No se encontró el fichero para generar el pdf)" + fileNotFoundException);
+       // }
+        document.open();
+        // We add metadata to PDF
+        // Añadimos los metadatos del PDF
+        document.addTitle("Table export to PDF (Exportamos la tabla a PDF)");
+        document.addSubject("Using iText (usando iText)");
+        document.addKeywords("Java, PDF, iText");
+        document.addAuthor("Código Xules");
+        document.addCreator("Código Xules");
+         
+        // First page (Primera página)
+        Anchor anchor = new Anchor("Table export to PDF (Exportamos la tabla a PDF)", categoryFont);
+        anchor.setName("Table export to PDF (Exportamos la tabla a PDF)");
+ 
+        // Second parameter is the number of the chapter (El segundo parámetro es el número del capítulo).
+        Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+ 
+        Paragraph subPara = new Paragraph("Do it by Xules (Realizado por Xules)", subCategoryFont);
+        Section subCatPart = catPart.addSection(subPara);
+        subCatPart.add(new Paragraph("This is a simple example (Este es un ejemplo sencillo)"));
+                     
+        // Create the table (Creamos la tabla)
+        PdfPTable table = new PdfPTable(jTable.getColumnCount()); 
+          
+        // Now we fill the rows of the PdfPTable (Ahora llenamos las filas de PdfPTable)
+        PdfPCell columnHeader;
+        // Fill table columns header 
+        // Rellenamos las cabeceras de las columnas de la tabla.                
+        for (int column = 0; column < jTable.getColumnCount(); column++) {                 
+            columnHeader = new PdfPCell(new Phrase(jTable.getColumnName(column)));
+            columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(columnHeader);
+        }
+        table.setHeaderRows(1);
+        // Fill table rows (rellenamos las filas de la tabla).                
+        for (int row = 0; row < jTable.getRowCount(); row++) {                
+            for (int column = 0; column < jTable.getColumnCount(); column++) { 
+                table.addCell(jTable.getValueAt(row, column).toString());
+            }
+        } 
+        subCatPart.add(table);
+         
+        document.add(catPart);
+         
+        document.close();
+        JOptionPane.showMessageDialog(this.jPanelFicheros, "Your PDF file has been generated!(¡Se ha generado tu hoja PDF!)",
+                "RESULTADO", JOptionPane.INFORMATION_MESSAGE);
+    } catch (DocumentException documentException) {
+        System.out.println("The file not exists (Se ha producido un error al generar un documento): " + documentException);
+        JOptionPane.showMessageDialog(this.jPanelFicheros, "The file not exists (Se ha producido un error al generar un documento): " + documentException,
+                "ERROR", JOptionPane.ERROR_MESSAGE);
+    }     
+              
+}*/
     /**
      * @param args the command line arguments
      */
@@ -188,6 +346,7 @@ public class Tabla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton PFD;
     private javax.swing.JButton aceptar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

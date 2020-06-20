@@ -48,7 +48,7 @@ public class ControlIMC extends javax.swing.JFrame {
     public void IMC(){
 
           try{
-           String ip= "192.168.0.8";
+           String ip= "192.168.0.6";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -267,7 +267,7 @@ public class ControlIMC extends javax.swing.JFrame {
 
     private void registrarAvanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarAvanceActionPerformed
       try{
-           String ip= "192.168.0.8";
+           String ip= "192.168.0.6";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -296,7 +296,7 @@ public class ControlIMC extends javax.swing.JFrame {
        edtext.pack();
         try{
             
-           String ip= "192.168.0.8";
+           String ip= "192.168.0.6";
            // Registry reg = LocateRegistry.getRegistry("192.168.43.165", 1098);
             Registry miRegistro = LocateRegistry.getRegistry(ip, 1099);
             Calculadora c =(Calculadora)miRegistro.lookup("Calculadora");
@@ -352,7 +352,7 @@ public class ControlIMC extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new ControlIMC().setVisible(true);
+                //new ControlIMC("root").setVisible(true);
             }
         });
     }

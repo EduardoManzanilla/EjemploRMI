@@ -19,11 +19,11 @@ public class Servidor {
      */
     public static void main(String[] args) {
         try {
-            System.setProperty("java.rmi.server.hostname", "192.168.0.8");
-            Registry r = java.rmi.registry.LocateRegistry.createRegistry(1099);
+            System.setProperty("java.rmi.server.hostname", "192.168.0.6");//se añade la direción ip en la se montara el servidor 
+            Registry r = java.rmi.registry.LocateRegistry.createRegistry(1099);//se le asigna un puerto para que este escuchando el servidor
             //LocateRegisty.getRegistry();
-            r.rebind("Calculadora", new rmi());
-            JOptionPane.showMessageDialog(null, "Servidor Conectado");
+            r.rebind("Calculadora", new rmi());//se crea un registros con un nombre identificador se le asigna la intancia del metodo a implementar
+            JOptionPane.showMessageDialog(null, "Servidor Levantado");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Servidor no Conectado" + e);
