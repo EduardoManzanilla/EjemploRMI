@@ -209,10 +209,7 @@ public class Tabla extends javax.swing.JFrame {
            Paragraph titulo = new Paragraph("Historial de Avance \n\n", 
             FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
            
-      
-      //   Anchor anchor = new Anchor("Table export to PDF (Exportamos la tabla a PDF)", categoryFont);
-        // anchor.setName("Table export to PDF (Exportamos la tabla a PDF)");
-           //doc.addTitle("HISTORIAL DE AVANCES");
+     
            doc.add(titulo);
            
            PdfPTable t = new PdfPTable(4);
@@ -246,70 +243,7 @@ public class Tabla extends javax.swing.JFrame {
        
        doc.close();
     }//GEN-LAST:event_PFDActionPerformed
-/*
-    public void utilJTableToPdf(JTable jTable, File pdfNewFile, String title){    
-    try {
-        // We create the document and set the file name.        
-        // Creamos el documento e indicamos el nombre del fichero.
-        Document document = new Document();
-      //  try {
-            PdfWriter.getInstance(document, new FileOutputStream(pdfNewFile));
-       // } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("No such file was found to generate the PDF (No se encontró el fichero para generar el pdf)" + fileNotFoundException);
-       // }
-        document.open();
-        // We add metadata to PDF
-        // Añadimos los metadatos del PDF
-        document.addTitle("Table export to PDF (Exportamos la tabla a PDF)");
-        document.addSubject("Using iText (usando iText)");
-        document.addKeywords("Java, PDF, iText");
-        document.addAuthor("Código Xules");
-        document.addCreator("Código Xules");
-         
-        // First page (Primera página)
-        Anchor anchor = new Anchor("Table export to PDF (Exportamos la tabla a PDF)", categoryFont);
-        anchor.setName("Table export to PDF (Exportamos la tabla a PDF)");
- 
-        // Second parameter is the number of the chapter (El segundo parámetro es el número del capítulo).
-        Chapter catPart = new Chapter(new Paragraph(anchor), 1);
- 
-        Paragraph subPara = new Paragraph("Do it by Xules (Realizado por Xules)", subCategoryFont);
-        Section subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("This is a simple example (Este es un ejemplo sencillo)"));
-                     
-        // Create the table (Creamos la tabla)
-        PdfPTable table = new PdfPTable(jTable.getColumnCount()); 
-          
-        // Now we fill the rows of the PdfPTable (Ahora llenamos las filas de PdfPTable)
-        PdfPCell columnHeader;
-        // Fill table columns header 
-        // Rellenamos las cabeceras de las columnas de la tabla.                
-        for (int column = 0; column < jTable.getColumnCount(); column++) {                 
-            columnHeader = new PdfPCell(new Phrase(jTable.getColumnName(column)));
-            columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(columnHeader);
-        }
-        table.setHeaderRows(1);
-        // Fill table rows (rellenamos las filas de la tabla).                
-        for (int row = 0; row < jTable.getRowCount(); row++) {                
-            for (int column = 0; column < jTable.getColumnCount(); column++) { 
-                table.addCell(jTable.getValueAt(row, column).toString());
-            }
-        } 
-        subCatPart.add(table);
-         
-        document.add(catPart);
-         
-        document.close();
-        JOptionPane.showMessageDialog(this.jPanelFicheros, "Your PDF file has been generated!(¡Se ha generado tu hoja PDF!)",
-                "RESULTADO", JOptionPane.INFORMATION_MESSAGE);
-    } catch (DocumentException documentException) {
-        System.out.println("The file not exists (Se ha producido un error al generar un documento): " + documentException);
-        JOptionPane.showMessageDialog(this.jPanelFicheros, "The file not exists (Se ha producido un error al generar un documento): " + documentException,
-                "ERROR", JOptionPane.ERROR_MESSAGE);
-    }     
-              
-}*/
+
     /**
      * @param args the command line arguments
      */
